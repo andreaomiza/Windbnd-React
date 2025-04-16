@@ -62,6 +62,19 @@ const Home = () => {
     handleSearch(location, adults, children); // Filtrar estancias según la ubicación seleccionada
   };
 
+  // Función para reiniciar los filtros y hacer scroll al inicio
+  const resetFilters = () => {
+    setSelectedLocation(""); // Resetea la ubicación seleccionada
+    setAdults(0); // Resetea el número de adultos
+    setChildren(0); // Resetea el número de niños
+    setFilteredStays(staysData); // Muestra todas las estancias
+    setIsLocationModalOpen(false); // Cierra el modal de ubicación
+    setIsGuestsModalOpen(false); // Cierra el modal de invitados
+
+    // Desplaza la página al inicio
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   return (
     <div className="min-h-screen bg-gray-100">
       <Header
@@ -70,6 +83,7 @@ const Home = () => {
         onSearch={() => handleSearch(selectedLocation, Math.max(0, adults), Math.max(0, children))}
         selectedLocation={selectedLocation}
         guests={guests}
+        resetFilters={resetFilters} // Pasa la función para reiniciar los filtros
       />
 
       {/* Modal for Location */}
